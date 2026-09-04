@@ -1,5 +1,9 @@
 # honest-chart
 
+[![license](https://img.shields.io/badge/license-Apache--2.0-0b7285)](LICENSE)
+[![grade](https://img.shields.io/badge/efaimo%20check--skill-A%20(100)-0b7285)](https://efaimo.ai/skills)
+[![house-style](https://github.com/efaimo-ai/honest-chart/actions/workflows/house-style.yml/badge.svg)](https://github.com/efaimo-ai/honest-chart/actions/workflows/house-style.yml)
+
 An Agent Skill for turning data into a chart that says what the data says, and
 proving it did.
 
@@ -8,6 +12,28 @@ checkable claim, and it is almost never checked. This skill makes an agent build
 the visualization so its geometry is derived from the data, refuse the handful
 of ways charts routinely mislead, and then verify the finished chart by reading
 its values back off the render.
+
+## Encode, then read it back
+
+```mermaid
+flowchart LR
+    D["the numbers"] --> E["encode"]
+    E --> G["geometry proportional<br/>to the value"]
+    G --> RB["read the values back<br/>off the rendered SVG"]
+    RB --> OK["they match<br/><i>the picture is the claim</i>"]
+    RB --> NO["they do not<br/><i>the picture is making<br/>a different claim</i>"]
+    E -. refuse .-> X1["truncated axis"]
+    E -. refuse .-> X2["second y-axis"]
+    E -. refuse .-> X3["area that does not<br/>scale with value"]
+    E -. refuse .-> X4["cherry-picked window"]
+    classDef pass fill:#0b728522,stroke:#0b7285;
+    classDef fail fill:#c9282822,stroke:#c92828;
+    class OK pass;
+    class NO,X1,X2,X3,X4 fail;
+```
+
+The read-back is what makes it a check rather than a style guide. A chart you
+have not read the numbers back off is a claim you have not verified.
 
 ## The problem
 
@@ -70,12 +96,25 @@ It does not decide whether data is worth showing, or design the prettiest
 possible chart. It makes sure the chart does not misstate the data, and that you
 can prove it does not.
 
-## Related
 
-[`red-before-green`](https://github.com/efaimo-ai/red-before-green) is the
-general form of the read-back move: do not trust a clean result until you have
-watched it fail. [`efaimo`](https://github.com/efaimo-ai/efaimo) audits the
-quality and context cost of MCP servers and Agent Skills, including this one.
+## The set
+
+Seven skills, each one a discipline that cost something to learn.
+
+| skill | the question it asks |
+|---|---|
+| [`red-before-green`](https://github.com/efaimo-ai/red-before-green) | can this check fail at all? |
+| [`denominator`](https://github.com/efaimo-ai/denominator) | how much of the world can it see? |
+| [`read-back`](https://github.com/efaimo-ai/read-back) | did the write actually apply? |
+| [`claim-sweep`](https://github.com/efaimo-ai/claim-sweep) | what else still asserts the old value? |
+| [`unreleased-guard`](https://github.com/efaimo-ai/unreleased-guard) | does the copy describe what shipped? |
+| **`honest-chart`** (this one) | is the picture proportional to the data? |
+| [`mcp-stateless-migration`](https://github.com/efaimo-ai/mcp-stateless-migration) | does this server match the 2026-07-28 spec? |
+
+All of them are audited by [`efaimo`](https://github.com/efaimo-ai/efaimo), the
+CLI that measures the quality and context-window cost of MCP servers and Agent
+Skills. The index of every public skill it can find, graded, is at
+[efaimo.ai/skills](https://efaimo.ai/skills).
 
 ## License
 
