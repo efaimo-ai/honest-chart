@@ -1,11 +1,11 @@
 ---
 name: honest-chart
-description: Use when turning data into a chart, graph, plot, or any data visualization - a bar, line, pie, scatter, or an SVG figure of numbers - and before presenting it. Builds the chart so its geometry is proportional to the data, refuses the ways charts mislead (a truncated axis, a second y-axis, area that does not scale with value, a cherry-picked window), and verifies the finished chart by reading its values back off the render and checking they match the source.
+description: Use when turning data into a chart, graph, plot, or any data visualization - a bar, line, pie, scatter, or an SVG figure of numbers - and before presenting it. Covers the ways a chart misleads (a truncated axis, a second y-axis, area that does not scale with value, a cherry-picked window) and how to read the values back off the render to prove the picture matches the source.
 license: Apache-2.0
 metadata:
   version: "0.1.0"
   homepage: "https://efaimo.ai"
-  verified_against: "2026-08-03"
+  verified_against: "2026-09-04"
 ---
 
 # honest-chart
@@ -83,10 +83,13 @@ makes a chart you generate say what the data says, and lets you prove it did. It
 does not decide whether the data is worth charting - that is your call - only
 that the picture does not misstate it.
 
-## Related
+<!-- generated:siblings -->
 
-- [`red-before-green`](https://github.com/efaimo-ai/red-before-green) is the
-  general form of the third move: do not trust a clean result until you have
-  watched it fail. `honest-chart` applies it to the specific claim a chart makes.
-- [efaimo](https://github.com/efaimo-ai/efaimo) audits the quality and context
-  cost of MCP servers and Agent Skills, including this one.
+## Siblings
+
+Every skill in this set is about a report that was true about the wrong thing. The set: https://efaimo.ai/skills
+
+- `red-before-green` - the general form of move 3: do not trust a clean result until you have watched it fail.
+- `read-back` - reading a written artifact back to see what actually landed, here applied to a rendered figure.
+
+<!-- /generated:siblings -->
