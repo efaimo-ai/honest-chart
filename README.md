@@ -1,6 +1,5 @@
 # honest-chart
 
-[![npm](https://img.shields.io/npm/v/honest-chart?color=0b7285&label=npm)](https://www.npmjs.com/package/honest-chart)
 [![license](https://img.shields.io/badge/license-Apache--2.0-0b7285)](LICENSE)
 [![grade](https://img.shields.io/badge/efaimo%20check--skill-A%20(100)-0b7285)](https://efaimo.ai/skills)
 [![house-style](https://github.com/efaimo-ai/honest-chart/actions/workflows/house-style.yml/badge.svg)](https://github.com/efaimo-ai/honest-chart/actions/workflows/house-style.yml)
@@ -19,10 +18,21 @@ its values back off the render.
 ## Install
 
 ```sh
-npx honest-chart                 # into ./.claude/skills/honest-chart/
-npx honest-chart --global        # into ~/.claude/skills/honest-chart/
-npx honest-chart --check         # installed, and current?
+# into ./.claude/skills/honest-chart/
+npx -y github:efaimo-ai/honest-chart
+
+# into ~/.claude/skills/honest-chart/, for every project
+npx -y github:efaimo-ai/honest-chart --global
+
+# installed already, and still current?
+npx -y github:efaimo-ai/honest-chart --check
 ```
+
+That is the repository, not the registry, and it is deliberate: `honest-chart` is
+not on npm yet, and a README that prints `npx honest-chart` today would be
+advertising a command that 404s. The line above works right now. The day the
+package publishes it becomes `npx honest-chart`, and this README is regenerated from
+a committed registry probe rather than from anybody's memory.
 
 The package is the skill: `SKILL.md` and its `references/`, nothing else. The
 installer copies them, reads every byte back, and fails if what landed is not
@@ -30,7 +40,7 @@ what it wrote. It refuses to overwrite a directory whose contents differ unless
 you pass `--force`, and installing the same version twice is a success rather
 than a conflict.
 
-Or take it by hand. It is markdown; `npx honest-chart --print` writes `SKILL.md` to
+Or take it by hand. It is markdown; `npx -y github:efaimo-ai/honest-chart --print` writes `SKILL.md` to
 stdout, and the repository is the whole thing.
 
 <!-- /generated:install -->
@@ -129,7 +139,7 @@ ever fires.
 
 ```mermaid
 flowchart LR
-    N["npx honest-chart"] --> D[/".claude/skills/honest-chart/"/]
+    N["npx -y github:efaimo-ai/honest-chart"] --> D[/".claude/skills/honest-chart/"/]
     D --> M["frontmatter<br/><b>every session, always</b>"]
     D --> B["SKILL.md body<br/><i>only when it triggers</i>"]
     D --> R["references/<br/><i>only if the agent reads them</i>"]
