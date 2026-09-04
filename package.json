@@ -1,0 +1,44 @@
+{
+  "name": "honest-chart",
+  "version": "0.1.0",
+  "description": "when turning data into a chart, graph, plot, or any data visualization - a bar, line, pie, scatter, or an SVG figure of numbers - and before presenting it.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "efaimo ai (https://efaimo.ai)",
+  "homepage": "https://efaimo.ai/skills",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/efaimo-ai/honest-chart.git"
+  },
+  "bugs": {
+    "url": "https://github.com/efaimo-ai/honest-chart/issues"
+  },
+  "keywords": [
+    "agent-skill",
+    "agent-skills",
+    "claude",
+    "claude-code",
+    "ai-agents",
+    "mcp"
+  ],
+  "bin": {
+    "honest-chart": "bin/install.mjs"
+  },
+  "files": [
+    "SKILL.md",
+    "references",
+    "bin",
+    "NOTICE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "house-style": "node scripts/check-house-style.mjs"
+  },
+  "publishConfig": {
+    "provenance": true,
+    "access": "public"
+  }
+}
