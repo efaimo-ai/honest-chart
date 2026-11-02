@@ -4,7 +4,7 @@ description: Use when turning data into a chart, graph, plot, or any data visual
 license: Apache-2.0
 metadata:
   version: "0.1.0"
-  homepage: "https://efaimo.ai"
+  homepage: "https://efaimo.com"
   verified_against: "2026-09-04"
 ---
 
@@ -87,7 +87,7 @@ that the picture does not misstate it.
 
 ## Siblings
 
-Every skill in this set is about a report that was true about the wrong thing. The set: https://efaimo.ai/skills
+Every skill in this set is about a report that was true about the wrong thing. The set: https://efaimo.com/skills
 
 - `red-before-green` - the general form of move 3: do not trust a clean result until you have watched it fail.
 - `read-back` - reading a written artifact back to see what actually landed, here applied to a rendered figure.
