@@ -17,7 +17,7 @@ All notable changes to honest-chart are documented here. Format follows
 
 ### Added
 
-- **The skill is installable.** `npx -y github:efaimo-ai/honest-chart` copies `SKILL.md` and its
+- **The skill is installable.** `npx -y --allow-git=all github:efaimo-ai/honest-chart` copies `SKILL.md` and its
   `references/` into `./.claude/skills/honest-chart/`, with `--global`, `--dir`,
   `--check`, `--print`, `--uninstall` and `--force`. The installer reads every
   byte back after writing it and fails if what landed is not what it wrote, and
