@@ -66,6 +66,32 @@ value_ratio = value_a / value_b
 `area_ratio` should equal `value_ratio`. If instead the RADIUS ratio equals the
 value ratio, the areas are off by the square and the chart exaggerates.
 
+## Charts a library drew
+
+The formulas above need geometry. A library chart gives you its values more
+directly, and the axis is where it usually goes wrong.
+
+- **matplotlib.** After drawing, bars are `ax.patches`: `p.get_height()` is the
+  value in data units and `p.get_x()` the left edge. Pie wedges carry
+  `w.theta2 - w.theta1` in degrees. Lines are `ax.get_lines()`, values from
+  `line.get_ydata()`. `ax.get_ylim()` must start at 0 for bars. Save with
+  `format="svg"` to measure the drawn geometry with the formulas above.
+- **plotly.** The figure is data: `fig.data[i].y` against the source, and
+  `fig.layout.yaxis.range` for the axis. `None` means autorange, which keeps
+  zero in view for bar traces; an explicit range or `rangemode` is what to
+  inspect.
+- **Vega-Lite.** The values are in `data`, and `encoding.y.scale.zero: false`
+  or a custom `scale.domain` is a truncated axis. The default keeps zero for
+  unbinned quantitative x and y.
+- **Recharts.** The values are the `data` prop and the `dataKey` each series
+  reads. `YAxis` defaults to a domain starting at 0; `domain={['dataMin',
+  'dataMax']}` or `['auto', 'auto']` truncates it. The chart renders SVG in the
+  page, so the browser can measure each bar's path (`getBBox()`) against the
+  axis ticks.
+- **Spreadsheets.** Open the vertical axis options. A bar chart's minimum must
+  be 0, and an automatic minimum can quietly be something else when every
+  value is large.
+
 ## What a failed read-back means
 
 The picture and the numbers disagree, and the picture is what the reader

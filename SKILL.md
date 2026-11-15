@@ -1,6 +1,6 @@
 ---
 name: honest-chart
-description: Use when turning data into a chart, graph, plot, or any data visualization - a bar, line, pie, scatter, or an SVG figure of numbers - and before presenting it. Covers the ways a chart misleads (a truncated axis, a second y-axis, area that does not scale with value, a cherry-picked window) and how to read the values back off the render to prove the picture matches the source.
+description: Use when making a chart or plot from numbers, or reviewing one before it is shared - bar, line, pie, scatter, area, bubble or stacked, in SVG, HTML, matplotlib, plotly, Recharts, Vega-Lite or a spreadsheet. Catches the ways a chart misleads while every number is correct - a bar axis that skips zero, two y-axes, bubbles scaled by radius, a cherry-picked window, a rainbow scale on ordered data. Ends by reading the values back off the rendered chart and comparing them with the source. Not for diagrams without data or for library syntax questions.
 license: Apache-2.0
 metadata:
   version: "0.1.0"
@@ -21,7 +21,8 @@ Three moves: encode honestly, refuse the known lies, then read the chart back.
 Pick the chart for the data's shape, not the one that looks impressive. The map
 (comparison, trend, part-of-whole, distribution, relationship) and how to build
 each as clean, self-contained SVG is in
-[references/encodings.md](references/encodings.md).
+[references/encodings.md](references/encodings.md). The same rules hold for a
+chart a library draws.
 
 Then hold the encoding to the data:
 
@@ -44,13 +45,22 @@ each has a fix that keeps the chart honest without hiding the point.
 
 ## 3. Read it back
 
-An SVG is measurable text. After you render, measure the encoded values back OUT
-of the chart - the bar heights, the pie arc angles, the line's plotted points -
-and confirm they match the source data within a small tolerance. A chart you
-have not read back is an unverified claim. This is the "look at the artifact,
-not the spec" that the rest of these tools run on, applied to the one claim a
-chart makes. The measurements are in
-[references/read-back.md](references/read-back.md).
+Measure the encoded values back out of the finished chart and compare them
+with the source data. Read from what was rendered:
+
+- Hand-written or exported SVG: rect heights, arc sweep angles and point
+  coordinates, per [references/read-back.md](references/read-back.md).
+- matplotlib: after drawing, `[(p.get_x(), p.get_height()) for p in ax.patches]`
+  for bars and `line.get_ydata()` for lines, plus `ax.get_ylim()` for the axis.
+  Save with `format="svg"` when you need the geometry itself.
+- plotly, Vega-Lite, Recharts: the spec is data. Compare its values with the
+  source and check the axis in the same spec (`layout.yaxis.range`,
+  `scale.zero`, the `YAxis` `domain`). The rendered SVG in the page can be
+  measured like any other; the library details are in the same reference.
+
+Report it as a short table (label, source value, value read back) with the
+largest gap. A pixel of rounding is fine; anything larger is a bug in the
+chart.
 
 | chart | the measurement that proves it |
 |---|---|
@@ -59,13 +69,13 @@ chart makes. The measurements are in
 | line | each plotted point's y == the value at that x |
 | stacked | segments sum to the total, and each segment == its own value |
 
-## Build it self-contained
+## Build it so it renders the same anywhere
 
-The chart should be one artifact with nothing to fetch: inline the data, use a
-`viewBox` so it scales, keep text selectable, make it accessible (a `<title>`
-and `<desc>`, or `role="img"` with a label), and either be theme-aware or state
-the single theme it assumes. A chart that needs a CDN to render is a chart that
-breaks the moment it is shared.
+Put the data in the chart, inline or in a file shipped with it. If you use a
+library, pin an exact version. Give it a `viewBox` or a fixed size,
+selectable text and an accessible name (`<title>` and `<desc>`, or
+`role="img"` with a label), and state the theme it assumes if it is not
+theme-aware.
 
 ## The tells (a chart that is probably lying)
 
@@ -76,12 +86,11 @@ breaks the moment it is shared.
 - a time series cropped to exactly the window that makes the point;
 - a value with no unit and no source.
 
-## What this is not
+## Scope
 
-Not a charting library; there is nothing to install. It is the discipline that
-makes a chart you generate say what the data says, and lets you prove it did. It
-does not decide whether the data is worth charting - that is your call - only
-that the picture does not misstate it.
+Color, type and layout belong to whatever design guidance you already follow.
+This covers whether the geometry matches the numbers, and leaves whether the
+data is worth charting to you.
 
 <!-- generated:siblings -->
 

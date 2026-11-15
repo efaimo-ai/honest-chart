@@ -62,7 +62,7 @@ stdout, and the repository is the whole thing.
 flowchart LR
     D["the numbers"] --> E["encode"]
     E --> G["geometry proportional<br/>to the value"]
-    G --> RB["read the values back<br/>off the rendered SVG"]
+    G --> RB["read the values back<br/>off the rendered chart"]
     RB --> OK["they match<br/><i>the picture is the claim</i>"]
     RB --> NO["they do not<br/><i>the picture is making<br/>a different claim</i>"]
     E -. refuse .-> X1["truncated axis"]
@@ -88,9 +88,10 @@ look like a quadrupling. The data is right; the geometry lies; the reader takes
 away a ratio that is not there.
 
 The usual advice for this is a list of do-nots. This skill adds the move that
-actually catches the lie: an SVG is measurable text, so you read the encoded
-values back out of the rendered chart and confirm they match the source. A chart
-you have not read back is an unverified claim.
+actually catches the lie: you read the encoded values back out of the rendered
+chart and confirm they match the source. An SVG is measurable text, and a chart
+from matplotlib, plotly, Vega-Lite or Recharts hands you its values and its
+axis directly. A chart you have not read back is an unverified claim.
 
 ## Install
 
@@ -111,16 +112,18 @@ to build and no dependencies.
 | `SKILL.md` | the three moves - encode honestly, refuse the lies, read it back |
 | `references/encodings.md` | the chart for the data's shape, and how to build it as clean self-contained SVG |
 | `references/lies.md` | the specific ways charts mislead, each with its fix |
-| `references/read-back.md` | how to measure the values back out of a rendered chart to verify it |
+| `references/read-back.md` | how to measure the values back out of a rendered chart, SVG or library-made, to verify it |
 
 `SKILL.md` is small on purpose: it is what an agent loads at trigger time. The
 references load only when a chart actually needs them.
 
 ## When it fires
 
-You are asked to visualize data, draw a chart or graph, build a dashboard or an
-SVG figure of numbers, or present a result as a picture. Before you show it, you
-make the geometry proportional to the data and read it back to prove it.
+You are asked to make a chart or plot from numbers, by hand in SVG or with a
+library or a spreadsheet, or to check one before it is shared. Before you show
+it, you make the geometry proportional to the data and read it back to prove it.
+It stays quiet for diagrams with no data in them and for questions about a
+library's syntax.
 
 ## The part worth reading even if you never install it
 
