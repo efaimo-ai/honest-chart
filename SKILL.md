@@ -90,6 +90,6 @@ that the picture does not misstate it.
 Every skill in this set is about a report that was true about the wrong thing. The set: https://efaimo.com/skills
 
 - `red-before-green` - the general form of move 3: do not trust a clean result until you have watched it fail.
-- `read-back` - reading a written artifact back to see what actually landed, here applied to a rendered figure.
+- `read-it-back` - reading a written artifact back to see what actually landed, here applied to a rendered figure.
 
 <!-- /generated:siblings -->
