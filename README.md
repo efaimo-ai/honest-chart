@@ -58,22 +58,34 @@ stdout, and the repository is the whole thing.
 
 ## Encode, then read it back
 
-```mermaid
-flowchart LR
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/efaimo-ai/honest-chart/main/assets/diagram-81b52368e3-dark.png">
+  <img alt="Encode the numbers as geometry proportional to the value, then read the values back off the rendered chart. If they match, the picture is the claim. If they do not, the picture is making a different claim. Encoding refuses a truncated axis, a second y-axis, area that does not scale with value, and a cherry-picked window." src="https://raw.githubusercontent.com/efaimo-ai/honest-chart/main/assets/diagram-81b52368e3-light.png" width="712">
+</picture>
+
+<details>
+<summary>Mermaid source</summary>
+
+```text
+flowchart TD
+    accDescr: Encode the numbers as geometry proportional to the value, then read the values back off the rendered chart. If they match, the picture is the claim. If they do not, the picture is making a different claim. Encoding refuses a truncated axis, a second y-axis, area that does not scale with value, and a cherry-picked window.
     D["the numbers"] --> E["encode"]
     E --> G["geometry proportional<br/>to the value"]
     G --> RB["read the values back<br/>off the rendered chart"]
     RB --> OK["they match<br/><i>the picture is the claim</i>"]
     RB --> NO["they do not<br/><i>the picture is making<br/>a different claim</i>"]
-    E -. refuse .-> X1["truncated axis"]
-    E -. refuse .-> X2["second y-axis"]
-    E -. refuse .-> X3["area that does not<br/>scale with value"]
-    E -. refuse .-> X4["cherry-picked window"]
+    E -. refuse .-> X
+    subgraph X [" "]
+        direction TB
+        X1["truncated axis"] ~~~ X2["second y-axis"] ~~~ X3["area that does not<br/>scale with value"] ~~~ X4["cherry-picked window"]
+    end
     classDef pass fill:#0b728522,stroke:#0b7285;
     classDef fail fill:#c9282822,stroke:#c92828;
     class OK pass;
     class NO,X1,X2,X3,X4 fail;
 ```
+
+</details>
 
 The read-back is what makes it a check rather than a style guide. A chart you
 have not read the numbers back off is a claim you have not verified.
@@ -151,8 +163,17 @@ A skill is not free just because it is markdown. Its frontmatter is loaded at
 the start of every session for every skill you have installed, whether or not it
 ever fires.
 
-```mermaid
-flowchart LR
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/efaimo-ai/honest-chart/main/assets/diagram-d67e099729-dark.png">
+  <img alt="Installing puts SKILL.md and references/ in .claude/skills/honest-chart/. The frontmatter enters your context window in every session, the body only when the skill triggers, and the references only if the agent reads them." src="https://raw.githubusercontent.com/efaimo-ai/honest-chart/main/assets/diagram-d67e099729-light.png" width="756">
+</picture>
+
+<details>
+<summary>Mermaid source</summary>
+
+```text
+flowchart TD
+    accDescr: Installing puts SKILL.md and references/ in .claude/skills/honest-chart/. The frontmatter enters your context window in every session, the body only when the skill triggers, and the references only if the agent reads them.
     N["npx -y --allow-git=all github:efaimo-ai/honest-chart"] --> D[/".claude/skills/honest-chart/"/]
     D --> M["frontmatter<br/><b>every session, always</b>"]
     D --> B["SKILL.md body<br/><i>only when it triggers</i>"]
@@ -165,6 +186,8 @@ flowchart LR
     class M always;
     class B,R lazy;
 ```
+
+</details>
 
 In this skill's case, measured by [efaimo](https://github.com/efaimo-ai/efaimo) `weigh` (v0.6.0, 2026-11-02):
 **91 tokens always resident**, 923 when it triggers, 2,391 across 3 reference files if the agent reads to the end.
@@ -188,8 +211,17 @@ Every skill in this set is about a report that was true about the wrong thing.
 | [`mcp-stateless-migration`](https://github.com/efaimo-ai/mcp-stateless-migration) | a server said ok | which revision it speaks |
 | [`efaimo`](https://github.com/efaimo-ai/efaimo) | a tool said A(100) | what a grade certifies, and what it costs |
 
-```mermaid
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/efaimo-ai/honest-chart/main/assets/diagram-1faed2f54f-dark.png">
+  <img alt="Every skill in the set and the efaimo CLI, with an edge for each handoff between two of them. honest-chart is highlighted." src="https://raw.githubusercontent.com/efaimo-ai/honest-chart/main/assets/diagram-1faed2f54f-light.png" width="758">
+</picture>
+
+<details>
+<summary>Mermaid source</summary>
+
+```text
 graph TD
+    accDescr: Every skill in the set and the efaimo CLI, with an edge for each handoff between two of them. honest-chart is highlighted.
     red_before_green["red-before-green"]
     denominator["denominator"]
     read_it_back["read-it-back"]
@@ -214,6 +246,8 @@ graph TD
     classDef self fill:#0b728533,stroke:#0b7285,stroke-width:2px;
     class honest_chart self;
 ```
+
+</details>
 
 Each edge is a real handoff, not a category: the reason one skill points at
 another is written into it at [efaimo.com/skills](https://efaimo.com/skills), and
